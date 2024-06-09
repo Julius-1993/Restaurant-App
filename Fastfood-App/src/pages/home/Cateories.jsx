@@ -14,7 +14,12 @@ const Cateories = () => {
       des: "(124 break fast)",
       image: "/category/img2.png",
     },
-    { id: 3, title: "Desert", des: "(36 desert)", image: "/category/img3.png" },
+    { 
+      id: 3, 
+      title: "Desert", 
+      des: "(36 desert)", 
+      image: "/category/img3.png"
+     },
     {
       id: 4,
       title: "Browse All",
@@ -44,7 +49,7 @@ const Cateories = () => {
             </div>
             <div className="mt-5 space-y-1">
               <h5>{item.title}</h5>
-              <p>{item.des}</p>
+              <p className="font-bold text-orange-500">{item.des}</p>
             </div>
           </div>
         ))}

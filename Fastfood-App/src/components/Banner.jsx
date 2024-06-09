@@ -21,27 +21,32 @@ const Banner = () => {
                   type="radio"
                   name="rating-2"
                   className="mask mask-star-2 bg-orange-400"
+                  readOnly
                 />
                 <input
                   type="radio"
                   name="rating-2"
                   className="mask mask-star-2 bg-orange-400"
                   checked
+                  readOnly
                 />
                 <input
                   type="radio"
                   name="rating-2"
                   className="mask mask-star-2 bg-orange-400"
+                  readOnly
                 />
                 <input
                   type="radio"
                   name="rating-2"
                   className="mask mask-star-2 bg-orange-400"
+                  readOnly
                 />
                 <input
                   type="radio"
                   name="rating-2"
                   className="mask mask-star-2 bg-orange-400"
+                  readOnly
                 />
               </div>
               <p className="font-semibold text-red-500">&#8358;1,500</p>
