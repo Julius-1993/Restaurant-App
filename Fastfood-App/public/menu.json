@@ -188,7 +188,7 @@
       "name": "Chicken and Walnut Salad",
       "recipe": "Pan roasted pork belly with gratin potato, braised Savoy cabbage, apples, thyme and calvados jus",
       "image": "/recipes/img3.png",
-      "category": "salad",
+      "category": "Milky-Doughnut",
       "price": 13.5
   },
   {
@@ -228,7 +228,7 @@
       "name": "Chicken and Walnut Salad",
       "recipe": "Pan roasted pork belly with gratin potato, braised Savoy cabbage, apples, thyme and calvados jus",
       "image": "/recipes/img2.png",
-      "category": "dessert",
+      "category": "Milky-Doughnut",
       "price": 13.5
   },
   {
@@ -236,7 +236,7 @@
       "name": "Escalope de Veau",
       "recipe": "Pan roasted haddock fillet wrapped in smoked French bacon with pea purée and tomato and chive vinaigrette",
       "image": "/recipes/img3.png",
-      "category": "dessert",
+      "category": "Sharwama",
       "price": 12.5
   },
   {
@@ -276,7 +276,7 @@
       "name": "Haddock",
       "recipe": "Chargrilled fresh tuna steak (served medium rare) on classic Niçoise salad with French beans.",
       "image": "/recipes/img2.png",
-      "category": "soup",
+      "category": "Milky-Doughnut",
       "price": 14.7
   },
   {
@@ -300,7 +300,7 @@
       "name": "Chicken and Walnut Salad",
       "recipe": "Pan roasted pork belly with gratin potato, braised Savoy cabbage, apples, thyme and calvados jus",
       "image": "/recipes/img2.png",
-      "category": "dessert",
+      "category": "Rice",
       "price": 13.5
   },
   {
@@ -316,7 +316,7 @@
       "name": "Haddock",
       "recipe": "Chargrilled fresh tuna steak (served medium rare) on classic Niçoise salad with French beans",
       "image": "/recipes/img1.png",
-      "category": "dessert",
+      "category": "Rice",
       "price": 14.7
   },
   {
@@ -345,15 +345,15 @@
   },
   {
       "_id": "642c155b2c4774f05c36ee85",
-      "name": "Tuna Niçoise",
+      "name": "A Sharwama",
       "recipe": "Warm goats cheese and roasted vegetable salad with black olive tapenade crostini",
       "image": "/recipes/img2.png",
-      "category": "dessert",
+      "category": "Sharwama",
       "price": 10.5
   },
   {
       "_id": "642c155b2c4774f05c36ee93",
-      "name": "Tuna Niçoise",
+      "name": "Chicken Flavour Pizza",
       "recipe": "Warm goats cheese and roasted vegetable salad with black olive tapenade crostini",
       "image": "/recipes/img3.png",
       "category": "pizza",
@@ -377,10 +377,10 @@
   },
   {
       "_id": "642c155b2c4774f05c36eeb7",
-      "name": "Fish Parmentier",
+      "name": "Ice-cream",
       "recipe": "Sautéed breaded veal escalope with watercress, lemon and veal jus.",
       "image": "/recipes/img1.png",
-      "category": "soup",
+      "category": "Ice-cream",
       "price": 9.5
   },
   {
@@ -436,7 +436,7 @@
       "name": "Escalope de Veau",
       "recipe": "Pan roasted haddock fillet wrapped in smoked French bacon with pea purée and tomato and chive vinaigrette",
       "image": "/recipes/img1.png",
-      "category": "dessert",
+      "category": "Sharwama",
       "price": 12.5
   },
   {
@@ -476,7 +476,7 @@
       "name": "Tuna Niçoise",
       "recipe": "Warm goats cheese and roasted vegetable salad with black olive tapenade crostini",
       "image": "/recipes/img1.png",
-      "category": "soup",
+      "category": "Ice-cream",
       "price": 10.5
   }
 ]

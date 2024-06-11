@@ -18,6 +18,16 @@ header{
     @apply text-4xl md:text-5xl font-bold my-2 md:leading-snug leading-snug;
 }
 
+.slick-dots li.slick-active button:before{
+    color: white !important;
+}
+
 .heartStar{
     border-radius: 0px 28px 0px 28px;
+}
+
+.active{
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    color: #39DB4A;
 }

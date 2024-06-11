@@ -1,37 +1,43 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import logo from "/logo.png";
-import { BiSolidPhoneCall } from "react-icons/bi";
+import { FaRegUser } from "react-icons/fa";
+import Modal from "./Modal";
+import { AuthContext } from "../contexts/AuthProvider";
 const Navbar = () => {
   const [isSticky, setSticky] = useState(false);
-//handle scroll function
-  useEffect( () =>{
-    const handleScroll = () =>{
+
+  const {user} = useContext(AuthContext);
+  console.log(user)
+  
+  //handle scroll function
+  useEffect(() => {
+    const handleScroll = () => {
       const offset = window.scrollY;
-      if(offset > 0){
-        setSticky(true)
-      } else{
-        setSticky(false)
+      if (offset > 0) {
+        setSticky(true);
+      } else {
+        setSticky(false);
       }
-    }; 
+    };
 
-    window.addEventListener('scroll', handleScroll);
-    return() =>{
-      window.addEventListener('scroll', handleScroll);
-    }
-
-
-  }, [])
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.addEventListener("scroll", handleScroll);
+    };
+  }, []);
   const navItems = (
     <>
       <li>
-        <a href="/">Home</a>
+        <a href="/" className="text-success">
+          Home
+        </a>
       </li>
       <li>
         <details>
           <summary>Menu</summary>
           <ul className="p-2">
             <li>
-              <a>All</a>
+              <a href="/menu">All</a>
             </li>
             <li>
               <a>Salad</a>
@@ -77,7 +83,13 @@ const Navbar = () => {
   );
   return (
     <header className="max-w-screen-2xl container mx-auto fixed top-0 left-0 right-0 transition-all duration-300 ease-in-out">
-      <div className={`navbar xl:px-24 ${isSticky ? "shadow-md  bg-primary transition-all duration-300 ease-in-out" : ""}`}>
+      <div
+        className={`navbar xl:px-24 ${
+          isSticky
+            ? "shadow-md  bg-primary transition-all duration-300 ease-in-out"
+            : ""
+        }`}
+      >
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -152,11 +164,15 @@ const Navbar = () => {
               <span className="badge badge-sm indicator-item">8</span>
             </div>
           </div>
-          {/* Contact button */}
-          <a className="btn bg-success rounded-full px-6 text-white flex items-center gap-2">
-            <BiSolidPhoneCall />
-            Contant Us
-          </a>
+          {/* Login button */}
+          <button
+            onClick={() => document.getElementById("my_modal_5").showModal()}
+            className="btn bg-success rounded-full px-6 text-white flex items-center gap-2"
+          >
+            <FaRegUser />
+            Login
+          </button>
+          <Modal/>
         </div>
       </div>
     </header>
