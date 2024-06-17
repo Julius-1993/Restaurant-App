@@ -3,6 +3,9 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../contexts/AuthProvider";
+import axios from "axios";
+import useAuth from "../hooks/useAuth";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const Modal = () => {
   const {
@@ -11,34 +14,68 @@ const Modal = () => {
     formState: { errors },
   } = useForm();
 
-  const {signUPWithGmail, login} = useContext(AuthContext);
-  const [errorMessage, setErrorMessage] = useState("");
+  const { signUPWithGmail, login } = useAuth();
+  const [errorMessage, seterrorMessage] = useState("");
+  const axiosPublic = useAxiosPublic();
 
-  //Redirect to home page function
-  const loacation = useLocation();
-  const naigate = useNavigate();
-
-
+  //Redirect to home page or specific page function
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
 
   const onSubmit = (data) => {
     const email = data.email;
     const password = data.password;
-    login(email, password).then((result) => {
-      const user = result.user;
-      alert("Login Successful");
-    }).catch((error) => {
-      const errorMessage = error.message;
-      setErrorMessage("Provide a correct email and password!")
-    })
-  }
+    // console.log(email, password)
+    login(email, password)
+      .then((result) => {
+        // Signed in
+        const user = result.user;
+        const userInfo = {
+          name: data.name,
+          email: data.email,
+        };
+        axiosPublic
+          .post("/users", userInfo)
+          .then((response) => {
+            // console.log(response);
+            alert("Login Successfully!");
+            document.getElementById("my_modal_5").close();
+            navigate(from, { replace: true });
+          });
+        // console.log(user);
+        
+        // ...
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        seterrorMessage("Please provide valid email & password!");
+      });
+      reset()
 
-  //Google Signin
-  const handleLogin = () =>{
-    signUPWithGmail().then((result) => {
-      const user = result.user;
-      alert("Login Successfully!")
-    }).catch ((error) => console.log(error))
-  }
+  };
+
+    // google signin
+    const handleLogin = () => {
+      signUPWithGmail()
+        .then((result) => {
+          const user = result.user;
+          const userInfor = {
+            name: result?.user?.displayName,
+            email: result?.user?.email,
+          };
+          axiosPublic
+              .post("/users", userInfor)
+              .then((response) => {
+                // console.log(response);
+                alert("Login Successfully!")
+                document.getElementById("my_modal_5").close()
+                navigate(from, { replace: true });
+              });
+        })
+        .catch((error) => console.log(error));
+    };
+
   return (
     <dialog id="my_modal_5" className="modal modal-middle sm:modal-middle">
       <div className="modal-box">
@@ -58,7 +95,6 @@ const Modal = () => {
                 type="email"
                 placeholder="email"
                 className="input input-bordered"
-                required
                 {...register("email")}
               />
             </div>
@@ -70,7 +106,6 @@ const Modal = () => {
                 type="password"
                 placeholder="password"
                 className="input input-bordered"
-                required
                 {...register("password")}
               />
               <label className="label mt-1">
@@ -80,9 +115,11 @@ const Modal = () => {
               </label>
             </div>
             {/* Error test */}
-            {
-              errorMessage ? <p className="text-red-800 text-xs italic">{errorMessage}</p> : ""
-            }
+            {errorMessage ? (
+              <p className="text-red-800 text-xs italic">{errorMessage}</p>
+            ) : (
+              ""
+            )}
 
             {/* login button */}
             <div className="form-control mt-6">
@@ -108,7 +145,10 @@ const Modal = () => {
           </form>
           {/* Social Login */}
           <div className="text-center space-x-3 my-3">
-            <button className="btn btn-circle hover:bg-success hover:text-white" onClick={handleLogin}>
+            <button
+              className="btn btn-circle hover:bg-success hover:text-white"
+              onClick={handleLogin}
+            >
               <FaGoogle />
             </button>
             <button className="btn btn-circle hover:bg-blue-700 hover:text-white">

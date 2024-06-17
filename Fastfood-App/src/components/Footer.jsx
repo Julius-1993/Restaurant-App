@@ -7,7 +7,7 @@ const Footer = () => {
         <aside>
           <img
             src="/logo.png"
-            className="oobject-scale-down  h-25 w-40 items-center"
+            className="oobject-scale-down  h-20 w-40 items-center"
           />
           <p>
             Fastfood Kitchen.
@@ -32,7 +32,7 @@ const Footer = () => {
         </nav>
         <nav>
           <h6 className="footer-title">Contact Us</h6>
-          <a className="link link-hover">ajinnovationafrika@gmail.com</a>
+          <a className="link link-hover">barcardirestaurant@gmail.com</a>
           <a className="link link-hover">+2349019445309</a>
           <a className="link link-hover">Social Handle</a>
         </nav>

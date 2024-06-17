@@ -10,24 +10,27 @@ import {
   updateProfile,
 } from "firebase/auth";
 import app from "../components/firebase/firebase.config";
+import axios from 'axios';
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
-const googleprovider = new GoogleAuthProvider();
+const googleProvider = new GoogleAuthProvider();
 
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState('');
   const [loading, setLoading] = useState(true);
 
   // Create an Account
   const createUser = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   // signup with email account
   const signUPWithGmail = () => {
-    return signInWithPopup(auth, googleprovider);
+    setLoading(true);
+    return signInWithPopup(auth, googleProvider);
   };
 
   // Login using email and password
@@ -35,8 +38,9 @@ const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   }
   // Logout
-  const logout = () => {
-    signOut(auth)
+  const logOut = () => {
+    localStorage.removeItem('access-token')
+    return signOut(auth)
   }
   //Update Profile
   const updateUserProfile = (name, photoURL) => {
@@ -47,13 +51,23 @@ const AuthProvider = ({ children }) => {
   //checked signed-in user
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
         setUser(currentUser);
-        setLoading(false)
-      } else {
-        // User is signed out
-        // ...
-      }});
+       if(currentUser) {
+        const userInfo = {email: currentUser.email}
+        axios.post('http://localhost:3000/jwt', userInfo)
+        .then((response) => {
+          // console.log(response.data.token);
+          if(response.data.token){
+            localStorage.setItem("access-token", response.data.token)
+          }
+        })
+        setLoading(false);
+      } else{
+        localStorage.removeItem("access-token")
+      }
+    });
+
+
       return () =>{
         return unsubscribe();
       }
@@ -63,8 +77,9 @@ const AuthProvider = ({ children }) => {
     createUser,
     signUPWithGmail,
     login,
-    logout,
-    updateUserProfile
+    logOut,
+    updateUserProfile,
+    loading
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
