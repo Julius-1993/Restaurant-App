@@ -13,7 +13,7 @@ const AddMenu = () => {
   // image hosting key
   const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
   // console.log(image_hosting_key)
-  const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+  const image_hosting_api = `https://api.imgbb.com/1/upload?key= ${image_hosting_key}`;
   const onSubmit = async (data) => {
     // console.log(data)
     const imageFile = { image: data.image[0] };
@@ -39,7 +39,7 @@ const AddMenu = () => {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Your Item is inserted successfully!",
+          title: "Your Item is added successfully!",
           showConfirmButton: false,
           timer: 1500
         });
@@ -50,21 +50,22 @@ const AddMenu = () => {
   return (
     <div className="w-full md:w-[870px] px-4 mx-auto">
       <h2 className="text-2xl font-semibold my-4">
-        Upload A New <span className="text-green">Menu Item</span>
+        Upload A New <span className="text-success">Menu Item</span>
       </h2>
 
       {/* form here */}
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="form-control w-full">
+          <div className="form-control w-full my-6">
             <label className="label">
-              <span className="label-text">Recipe Name*</span>
+              <span className="label-text">Recipe Name <span className="text-red-500">*</span></span>
             </label>
             <input
               type="text"
               {...register("name", { required: true })}
               placeholder="Recipe Name"
               className="input input-bordered w-full"
+             
             />
           </div>
 
@@ -73,23 +74,24 @@ const AddMenu = () => {
             {/* categories */}
             <div className="form-control w-full my-6">
               <label className="label">
-                <span className="label-text">Category*</span>
+                <span className="label-text">Category <span className="text-red-500">*</span></span>
               </label>
               <select
                 {...register("category", { required: true })}
                 className="select select-bordered"
                 defaultValue="default"
+                
               >
                 <option disabled value="default">
                   Select a category
                 </option>
                 <option value="salad">Salad</option>
                 <option value="pizza">Pizza</option>
-                <option value="soup">Sharwama</option>
+                <option value="Sharwama">Sharwama</option>
                 <option value="soup">Soup</option>
-                <option value="dessert">Ice-Cream</option>
-                <option value="drinks">Milky-Doughnut</option>
-                <option value="drinks">Rice</option>
+                <option value="Ice-cream">Ice-Cream</option>
+                <option value="Milky-Doughnut">Milk-Doughnut</option>
+                <option value="Rice">Rice</option>
                 <option value="popular">Popular</option>
               </select>
             </div>
@@ -97,7 +99,7 @@ const AddMenu = () => {
             {/* prices */}
             <div className="form-control w-full">
               <label className="label">
-                <span className="label-text">Price*</span>
+                <span className="label-text">Price <span className="text-red-500">*</span></span>
               </label>
               <input
                 type="number"
@@ -111,7 +113,7 @@ const AddMenu = () => {
           {/* 3rd row */}
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Recipe Details</span>
+              <span className="label-text">Recipe Details <span className="text-red-500">*</span></span>
             </label>
             <textarea
               {...register("recipe", { required: true })}

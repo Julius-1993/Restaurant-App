@@ -3,12 +3,16 @@ const app = express();
 const cors = require("cors");
 const port = process.env.PORT || 3000;
 const mongoose = require("mongoose");
+const axios = require("axios");
 const jwt = require("jsonwebtoken");
+const bodyParser = require("body-parser");
 require("dotenv").config();
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 // middleware
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.json());
 
 // mongodb configuration using mongoose
 
@@ -32,10 +36,34 @@ app.post("/jwt", async (req, res) => {
 const menuRoutes = require("./api/routes/menuRoutes");
 const cartRoutes = require("./api/routes/cartRoutes");
 const userRoutes = require("./api/routes/userRoutes");
+const paymentRoutes = require("./api/routes/paymentRoutes");
+const dashboardRoutes = require("./api/routes/revenuRoutes");
 
 app.use("/users", userRoutes);
 app.use("/menu", menuRoutes);
 app.use("/carts", cartRoutes);
+app.use('/payments', paymentRoutes);
+app.use('/dashboard-data', dashboardRoutes);
+// Stripe payment route
+app.post("/create-payment-intent", async (req, res) => {
+  const { price } = req.body;
+  const amount = price * 100;
+
+  // Create a PaymentIntent with the order amount and currency
+  const paymentIntent = await stripe.paymentIntents.create({
+    amount: amount,
+    currency: "usd",
+    
+    payment_method_types: ["card"],
+    
+  });
+
+  res.send({
+    clientSecret: paymentIntent.client_secret,
+  });
+});
+
+
 
 app.get("/", (req, res) => {
   res.send("Hello Developer AJ!");

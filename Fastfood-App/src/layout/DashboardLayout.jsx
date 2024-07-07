@@ -1,5 +1,5 @@
-import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { MdDashboardCustomize, MdSpaceDashboard } from "react-icons/md";
 import { FaLocationArrow, FaUsers } from "react-icons/fa6";
 import { FaCartShopping } from "react-icons/fa6";
@@ -14,6 +14,7 @@ import logo from "/logo.png";
 import Login from "../components/Login";
 import useAdmin from "../hooks/useAdmin";
 import useAuth from "../hooks/useAuth";
+import { AuthContext } from "../contexts/AuthProvider";
 
 const sharedLinks = (
   <>
@@ -47,6 +48,24 @@ const sharedLinks = (
 const DashboardLayout = () => {
   const {loading} = useAuth();
   const [isAdmin, isAdminLoading] = useAdmin();
+
+  const { logOut } = useContext(AuthContext);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
+
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        // Sign-out successful.
+        alert("Logout Succussfull!");
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
   return (
     <div>
       {
@@ -61,7 +80,7 @@ const DashboardLayout = () => {
             >
               <MdSpaceDashboard />
             </label>
-            <button className="btn rounded-full px-6 bg-red-700 flext items-center gap-2 text-white sm:hidden">
+            <button onClick={handleLogout} className="btn rounded-full px-6 bg-red-700 flext items-center gap-2 text-white sm:hidden">
               <FaUserAlt />
               LogOut
             </button>
@@ -80,7 +99,7 @@ const DashboardLayout = () => {
             {/* Sidebar content here */}
             <li>
               <Link to="/dashboard" className="flext justify-start mb-3">
-                <img src={logo} alt="" className="h-20 w-20" />
+                <img src={logo} alt="" className="h-10 w-30" />
                 <span class="badge badge-primary">Admin</span>
               </Link>
             </li>
@@ -92,7 +111,7 @@ const DashboardLayout = () => {
               </Link>
             </li>
             <li>
-              <Link to="/dashboard">
+              <Link to="/dashboard/manage-booking">
                 <FaCartShopping />
                 Manage Booking
               </Link>

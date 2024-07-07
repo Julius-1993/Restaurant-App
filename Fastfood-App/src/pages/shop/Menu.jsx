@@ -153,6 +153,12 @@ const Menu = () => {
               Rice
             </button>
             <button
+              onClick={() => filterItems("popular")}
+              className={selectedCategory === "popular" ? "active" : ""}
+            >
+              Popular
+            </button>
+            <button
               onClick={() => filterItems("Milky-Doughnut")}
               className={selectedCategory === "Milky-Doughnut" ? "active" : ""}
             >

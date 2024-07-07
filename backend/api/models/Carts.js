@@ -17,7 +17,12 @@ const cartSchema = new Schema({
         type: String,
         true: true,
         required: true,
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
     }
+
 }, {timestamps: true})
 
 const Carts = mongoose.model("Cart", cartSchema);

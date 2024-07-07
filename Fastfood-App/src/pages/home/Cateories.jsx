@@ -4,7 +4,7 @@ const Cateories = () => {
   const categoriesItems = [
     {
       id: 1,
-      title: "Main Dish",
+      title: "Hamburger",
       des: "(76 dishes)",
       image: "/category/img1.png",
     },
@@ -16,8 +16,8 @@ const Cateories = () => {
     },
     { 
       id: 3, 
-      title: "Desert", 
-      des: "(36 desert)", 
+      title: "Rice", 
+      des: "(36 Rice)", 
       image: "/category/img3.png"
      },
     {

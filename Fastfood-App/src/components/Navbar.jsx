@@ -46,22 +46,22 @@ const Navbar = () => {
               <a href="/menu">All</a>
             </li>
             <li>
-              <a>Salad</a>
+              <a href="/menu">Salad</a>
             </li>
             <li>
-              <a>Pizza</a>
+              <a href="/menu">Pizza</a>
             </li>
             <li>
-              <a>Sharwama</a>
+              <a href="/menu">Sharwama</a>
             </li>
             <li>
-              <a>Ice Cream</a>
+              <a href="/menu">Ice Cream</a>
             </li>
             <li>
-              <a>Milky Doughnut</a>
+              <a href="/menu">Milky Doughnut</a>
             </li>
             <li>
-              <a>Fried/Jollof Rice</a>
+              <a href="/menu">Fried/Jollof Rice</a>
             </li>
           </ul>
         </details>
@@ -83,7 +83,7 @@ const Navbar = () => {
         </details>
       </li>
       <li>
-        <a>Offers</a>
+        <a href="/menu">Offers</a>
       </li>
     </>
   );
@@ -122,7 +122,7 @@ const Navbar = () => {
             </ul>
           </div>
           <a href="/">
-            <img src={logo} alt="" class="object-scale-down h-20 w-30 p-2" />
+            <img src={logo} alt="" className="object-scale-down h-20 w-30 p-2" />
           </a>
         </div>
         <div className="navbar-center hidden lg:flex">

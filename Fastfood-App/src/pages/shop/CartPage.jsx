@@ -9,7 +9,6 @@ import axios from "axios";
 const CartPage = () => {
   const { user } = useContext(AuthContext);
   const [cart, refetch] = useCart();
-  console.log(cart)
   const [cartItems, setCartItems] = useState([]);
   // console.log(cartItems)
 
@@ -217,9 +216,11 @@ const CartPage = () => {
               Total Price:{" "}
               <span id="total-price">&#x20A6;{orderTotal.toFixed(2)}</span>
             </p>
-            <button className="btn btn-md bg-success text-white px-8 py-1">
+            <Link to="/process-checkout">
+            <button  className="btn btn-md bg-success text-white px-8 py-1">
               Procceed to Checkout
             </button>
+            </Link>
           </div>
         </div>
       </div> : <div className="text-center mt-20">

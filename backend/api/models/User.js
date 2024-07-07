@@ -12,9 +12,14 @@ const userSchema = new Schema({
     photoURL: String,
     role: {
         type: String,
-       enum: ['user', 'admin'],
-       default: 'user'
+        enum: ['user', 'admin'],
+        default: 'user'
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
     }
+
 }, {timestamps: true})
 
 // create a model instance

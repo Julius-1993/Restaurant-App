@@ -13,6 +13,9 @@ import Login from "../components/Login";
 import UpdateMenu from "../pages/dashboard/admin/UpdateMenu";
 import ManageItems from "../pages/dashboard/admin/ManageItems";
 import AddMenu from "../pages/dashboard/admin/AddMenu";
+import Payment from "../pages/shop/Payment";
+import Order from "../pages/dashboard/Order";
+import ManageBooking from "../pages/dashboard/admin/ManageBooking";
 
 const router = createBrowserRouter([
   {
@@ -28,8 +31,16 @@ const router = createBrowserRouter([
         element: <Menu />,
       },
       {
+        path: "/order",
+        element: <PrivateRouter><Order /></PrivateRouter>,
+      },
+      {
         path: "/cart-page",
         element: <CartPage/>,
+      },
+      {
+        path: "/process-checkout",
+        element: <Payment/>,
       },
       {
         path: "/update-profile",
@@ -47,6 +58,8 @@ const router = createBrowserRouter([
     element: <Signup />,
   },
   
+
+  //Admin Routes
   {
     path: "dashboard",
     element: <PrivateRouter><DashboardLayout /></PrivateRouter>,
@@ -71,6 +84,10 @@ const router = createBrowserRouter([
         path: "update-menu/:id",
         element: <UpdateMenu/>,
         loader: ({params}) => fetch(`http://localhost:3000/menu/${params.id}`)
+      },
+      {
+        path: 'manage-booking',
+        element: <ManageBooking/>
       }
     ]
   },

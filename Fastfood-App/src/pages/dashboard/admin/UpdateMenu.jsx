@@ -8,7 +8,7 @@ import { FaUtensils } from 'react-icons/fa';
 
 const UpdateMenu = () => {
     const item = useLoaderData();
-    console.log(item);
+    // console.log(item);
     const { register, handleSubmit, reset } = useForm();
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
@@ -134,6 +134,7 @@ const UpdateMenu = () => {
               {...register("image", { required: true })}
               type="file"
               className="file-input w-full max-w-xs"
+              
             />
           </div>
 

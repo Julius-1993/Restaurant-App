@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const ManageItems = () => {
-  const [menu, , refetch] = useMenu();
+  const [menu, refetch] = useMenu();
   const axiosSecure = useAxiosSecure();
 //   console.log(menu);
 
@@ -72,7 +72,7 @@ const ManageItems = () => {
                   <td>&#x20A6;{item.price}</td>
                   <td>
                     <Link to={`/dashboard/update-menu/${item._id}`}>
-                      <button className="btn btn-ghost btn-xs bg-orange-500 text-white">
+                      <button className="btn btn-ghost btn-xs bg-orange-600 text-white">
                         <FaEdit />
                       </button>
                     </Link>
@@ -87,7 +87,6 @@ const ManageItems = () => {
                   </td>
                 </tr>
               ))}
-              {/* row 1 */}
             </tbody>
           </table>
         </div>
