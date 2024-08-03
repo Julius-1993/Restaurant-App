@@ -54,10 +54,10 @@ app.use("/carts", cartRoutes);
 app.use('/payments', paymentRoutes);
 app.use('/dashboard-data', dashboardRoutes);
 
-app.use(express.static(path.join(__dirname, "/Fastfood-App/dist")));
+app.use(express.static(path.join(__dirname, "../Fastfood-App/dist")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "Fastfood-App", "dist", "index.html"));
+  res.sendFile(path.join(__dirname, "../Fastfood-App", "dist", "index.html"));
 })
 
 

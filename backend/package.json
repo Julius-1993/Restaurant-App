@@ -5,9 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js",
     "start": "node index.js",
+    "dev": "nodemon index.js",
     "build": "npm install && npm install --prefix Fastfood-App && npm run build --prefix Fastfood-App"
   },
   "keywords": [],
