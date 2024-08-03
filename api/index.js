@@ -1,26 +1,20 @@
-import express from "express";
-import mongoose from "mongoose";
+import express from 'express'
 import dotenv from "dotenv";
-import userRoutes from "./api/routes/userRoutes.js";
-import menuRoutes  from "./api/routes/menuRoutes.js";
-import cartRoutes  from "./api/routes/cartRoutes.js";
-import paymentRoutes from "./api/routes/paymentRoutes.js";
-import dashboardRoutes from "./api/routes/revenuRoutes.js";
+import mongoose from "mongoose";
+import userRoutes from "../api/routes/userRoutes.js";
+import menuRoutes from "../api/routes/menuRoutes.js";
+import cartRoutes from "../api/routes/cartRoutes.js";
+import paymentRoutes from "../api/routes/paymentRoutes.js";
+import dashboardRoutes from "../api/routes/revenuRoutes.js";
 import path from "path";
-import  jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import bodyParser from "body-parser";
-import cors from 'cors'
+import cors from "cors";
 
 dotenv.config();
 
-
-
-
 const __dirname = path.resolve();
 const app = express();
-
-
-
 
 // middleware
 app.use(cors());
@@ -47,20 +41,17 @@ app.post("/jwt", async (req, res) => {
 
 //   import routes here
 
-
 app.use("/users", userRoutes);
 app.use("/menu", menuRoutes);
 app.use("/carts", cartRoutes);
-app.use('/payments', paymentRoutes);
-app.use('/dashboard-data', dashboardRoutes);
+app.use("/payments", paymentRoutes);
+app.use("/dashboard-data", dashboardRoutes);
 
-app.use(express.static(path.join(__dirname, "../Fastfood-App/dist")));
+app.use(express.static(path.join(__dirname, "/Fastfood-App/dist")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../Fastfood-App", "dist", "index.html"));
-})
-
-
+  res.sendFile(path.join(__dirname, "Fastfood-App", "dist", "index.html"));
+});
 
 // Stripe payment route
 app.post("/create-payment-intent", async (req, res) => {
@@ -68,20 +59,18 @@ app.post("/create-payment-intent", async (req, res) => {
   const amount = price * 100;
 
   // Create a PaymentIntent with the order amount and currency
-  const paymentIntent = await stripe.process.env.STRIPE_SECRET_KEY.paymentIntents.create({
-    amount: amount,
-    currency: "NGN",
-    
-    payment_method_types: ["card"],
-    
-  });
+  const paymentIntent =
+    await stripe.process.env.STRIPE_SECRET_KEY.paymentIntents.create({
+      amount: amount,
+      currency: "NGN",
+
+      payment_method_types: ["card"],
+    });
 
   res.send({
     clientSecret: paymentIntent.client_secret,
   });
 });
-
-
 
 // app.get("/", (req, res) => {
 //   res.send("Hello Developer AJ!");
