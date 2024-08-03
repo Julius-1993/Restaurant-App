@@ -8,11 +8,20 @@ const jwt = require("jsonwebtoken");
 const bodyParser = require("body-parser");
 require("dotenv").config();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+import path from "path";
+
+const __dirname = path.resolve();
 
 // middleware
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
+
+app.use(express.static(path.join(__dirname, "/Fastfood-App/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "Fastfood-App", "dist", "index.html"));
+})
 
 // mongodb configuration using mongoose
 
