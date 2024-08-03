@@ -83,7 +83,7 @@ const router = createBrowserRouter([
       {
         path: "update-menu/:id",
         element: <UpdateMenu/>,
-        loader: ({params}) => fetch(`https://complete-fastfood-server.onrender.com/menu/${params.id}`)
+        loader: ({params}) => fetch(`http://localhost:3000/menu/${params.id}`)
       },
       {
         path: 'manage-booking',

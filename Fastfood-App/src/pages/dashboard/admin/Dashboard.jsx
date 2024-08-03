@@ -16,7 +16,7 @@ import { FaUsers } from "react-icons/fa6";
 import { GiProfit } from "react-icons/gi";
 import { BsCartDashFill } from "react-icons/bs";
 
-const API_BASE_URL = "https://complete-fastfood-server.onrender.com";
+const API_BASE_URL = "http://localhost:3000";
 
 export const fetchDashboardData = async () => {
   const token = localStorage.getItem("access-token");

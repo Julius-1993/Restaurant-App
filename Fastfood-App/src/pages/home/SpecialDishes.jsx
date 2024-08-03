@@ -35,7 +35,7 @@ const SpecialDishes = () => {
   const slider = React.useRef(null);
 
   useEffect(() => {
-    fetch("https://complete-fastfood-server.onrender.com/menu")
+    fetch("http://localhost:3000/menu")
       .then((res) => res.json())
       .then((data) => {
         const specials = data.filter((item) => item.category === "popular");
