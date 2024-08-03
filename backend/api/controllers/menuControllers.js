@@ -1,6 +1,6 @@
-const Menu = require("../models/Menu");
+import Menu from "../models/Menu.js";
 
-const getAllMenuItems = async(req, res) => {
+export const getAllMenuItems = async(req, res) => {
     try {
         const menus = await Menu.find({}).sort({createdAt: -1});
         res.status(200).json(menus)
@@ -10,7 +10,7 @@ const getAllMenuItems = async(req, res) => {
 }
 
 // post a new menu item
-const postMenuItem = async(req, res) => {
+export const postMenuItem = async(req, res) => {
     const newItem = req.body;
     try {
         const result = await Menu.create(newItem);
@@ -22,7 +22,7 @@ const postMenuItem = async(req, res) => {
 };
 
 // delete a menu item
-const deleteMenuItem = async(req, res) => {
+export const deleteMenuItem = async(req, res) => {
     const menuId = req.params.id;
     try {
         const deletedItem = await Menu.findByIdAndDelete(menuId);
@@ -37,7 +37,7 @@ const deleteMenuItem = async(req, res) => {
 };
 
 // get single menu item
-const singleMenuItem = async (req, res) => {
+export const singleMenuItem = async (req, res) => {
     const menuId = req.params.id;
     try {
         const menu = await Menu.findById(menuId);
@@ -49,7 +49,7 @@ const singleMenuItem = async (req, res) => {
 };
 
 // update single menu item
-const updateMenuItem = async (req, res) => {
+export const updateMenuItem = async (req, res) => {
     const menuId = req.params.id;
     const { name, recipe, image, category, price} = req.body;
     try {
@@ -68,13 +68,3 @@ const updateMenuItem = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
-
-
-
-module.exports = {
-    getAllMenuItems,
-    postMenuItem, 
-    deleteMenuItem,
-    singleMenuItem,
-    updateMenuItem
-}

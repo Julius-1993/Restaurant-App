@@ -1,23 +1,23 @@
-const express = require("express");
-const Menu = require("../models/Menu");
+import express from "express";
+import Menu from '../models/Menu.js';
+import {getAllMenuItems, postMenuItem, deleteMenuItem, singleMenuItem, updateMenuItem} from '../controllers/menuControllers.js';
 const router = express.Router();
 
-const menuController = require('../controllers/menuControllers')
 
 // get all menu items 
 
-router.get('/', menuController.getAllMenuItems )
+router.get('/', getAllMenuItems )
 
 // post a menu item
-router.post('/', menuController.postMenuItem);
+router.post('/', postMenuItem);
 
 // delete a menu item
-router.delete('/:id', menuController.deleteMenuItem);
+router.delete('/:id', deleteMenuItem);
 
 // get single menu item
-router.get('/:id', menuController.singleMenuItem);
+router.get('/:id', singleMenuItem);
 
 // update single menu item
-router.patch('/:id', menuController.updateMenuItem)
+router.patch('/:id', updateMenuItem)
 
-module.exports= router;
+export default router;

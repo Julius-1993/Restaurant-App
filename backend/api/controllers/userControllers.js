@@ -1,7 +1,7 @@
-const User = require("../models/User");
 
+import User from '../models/User.js';
 // get all users
-const getAllUsers = async (req, res) => {
+export const getAllUsers = async (req, res) => {
   try {
     const users = await User.find({});
     res.status(200).json(users);
@@ -11,7 +11,7 @@ const getAllUsers = async (req, res) => {
 };
 
 // post a new user
-const createUser = async (req, res) => {
+export const createUser = async (req, res) => {
   const user = req.body;
   const query = { email: user.email };
   try {
@@ -27,7 +27,7 @@ const createUser = async (req, res) => {
 };
 
 // delete a user
-const deleteUser = async (req, res) => {
+export const deleteUser = async (req, res) => {
   const userId = req.params.id;
   try {
     const deletedUser = await User.findByIdAndDelete(userId);
@@ -42,7 +42,7 @@ const deleteUser = async (req, res) => {
 };
 
 // get admin
-const getAdmin = async (req, res) => {
+export const getAdmin = async (req, res) => {
   const email = req.params.email;
   const query = { email: email };
   try {
@@ -62,7 +62,7 @@ const getAdmin = async (req, res) => {
 };
 
 // make admin of a user
-const makeAdmin = async (req, res) => {
+export const makeAdmin = async (req, res) => {
   const userId = req.params.id;
   const { name, email, photoURL, role } = req.body;
   try {
@@ -79,12 +79,4 @@ const makeAdmin = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-};
-
-module.exports = {
-  getAllUsers,
-  createUser,
-  deleteUser,
-  getAdmin,
-  makeAdmin,
 };

@@ -1,13 +1,16 @@
-const express = require("express");
-const mongoose = require("mongoose");
+import express from 'express'
+import mongoose from 'mongoose';
+import Payment from '../models/Payments.js';
+import Cart from '../models/Carts.js';
+import verifyToken from '../middleware/verifyToken.js'
+import verifyAdmin from '../middleware/verifyAdmin.js';
+
 const router = express.Router();
-const Payment = require("../models/Payments");
-const Cart = require("../models/Carts");
+
 const ObjectId = mongoose.Types.ObjectId;
 
 //Token
-const verifyToken = require("../middleware/verifyToken");
-const verifyAdmin = require("../middleware/verifyAdmin");
+
 
 //post payment information to db
 router.post("/", verifyToken, async (req, res) => {
@@ -67,4 +70,4 @@ router.put("/approve/:id", verifyToken, verifyAdmin, async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

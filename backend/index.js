@@ -1,17 +1,23 @@
-const express = require("express");
+import express from "express";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import userRoutes from "./api/routes/userRoutes.js";
+import menuRoutes  from "./api/routes/menuRoutes.js";
+import cartRoutes  from "./api/routes/cartRoutes.js";
+import paymentRoutes from "./api/routes/paymentRoutes.js";
+import dashboardRoutes from "./api/routes/revenuRoutes.js";
+import path from "path";
+import  jwt from "jsonwebtoken";
+import bodyParser from "body-parser";
+import cors from 'cors'
+
+dotenv.config();
+
+
+
+
+const __dirname = path.resolve();
 const app = express();
-const cors = require("cors");
-const port = process.env.PORT || 3000;
-const path = require("path");
-const mongoose = require("mongoose");
-const axios = require("axios");
-const jwt = require("jsonwebtoken");
-const bodyParser = require("body-parser");
-require("dotenv").config();
-
-
-
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 
 
@@ -40,11 +46,7 @@ app.post("/jwt", async (req, res) => {
 });
 
 //   import routes here
-const menuRoutes = require("./api/routes/menuRoutes");
-const cartRoutes = require("./api/routes/cartRoutes");
-const userRoutes = require("./api/routes/userRoutes");
-const paymentRoutes = require("./api/routes/paymentRoutes");
-const dashboardRoutes = require("./api/routes/revenuRoutes");
+
 
 app.use("/users", userRoutes);
 app.use("/menu", menuRoutes);
@@ -57,15 +59,18 @@ app.use(express.static(path.join(__dirname, "/Fastfood-App/dist")));
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "Fastfood-App", "dist", "index.html"));
 })
+
+
+
 // Stripe payment route
 app.post("/create-payment-intent", async (req, res) => {
   const { price } = req.body;
   const amount = price * 100;
 
   // Create a PaymentIntent with the order amount and currency
-  const paymentIntent = await stripe.paymentIntents.create({
+  const paymentIntent = await stripe.process.env.STRIPE_SECRET_KEY.paymentIntents.create({
     amount: amount,
-    currency: "usd",
+    currency: "NGN",
     
     payment_method_types: ["card"],
     
@@ -78,10 +83,10 @@ app.post("/create-payment-intent", async (req, res) => {
 
 
 
-app.get("/", (req, res) => {
-  res.send("Hello Developer AJ!");
-});
+// app.get("/", (req, res) => {
+//   res.send("Hello Developer AJ!");
+// });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+app.listen(3000, () => {
+  console.log(`server start on Port 3000`);
 });

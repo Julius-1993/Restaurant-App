@@ -1,10 +1,11 @@
-const express = require('express');
-const router = express.Router();
-const Payment = require("../models/Payments");
-const User = require('../models/User');
+import express from 'express'
+import Payment from '../models/Payments.js';
+import verifyToken from '../middleware/verifyToken.js'
+import verifyAdmin from '../middleware/verifyAdmin.js';
+import User from '../models/User.js';
 
-const verifyToken = require("../middleware/verifyToken");
-const verifyAdmin = require("../middleware/verifyAdmin");
+
+const router = express.Router();
 
 
 router.get('/', verifyToken, verifyAdmin, async (req, res) => {
@@ -107,4 +108,4 @@ router.get('/', verifyToken, verifyAdmin, async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
